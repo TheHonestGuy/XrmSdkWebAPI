@@ -1349,7 +1349,11 @@ module XrmSdk.WebAPI {
             if (typeof Xrm != "undefined") {
                 return Xrm.Page.context;
             } else {
-                throw new Error("Context is not available.");
+                if (typeof (parent as any).Xrm != "undefined") {
+                    return (parent as any).Xrm.Page.context;
+                } else {
+                    throw new Error("Context is not available.");
+                }
             }
         }
     }
